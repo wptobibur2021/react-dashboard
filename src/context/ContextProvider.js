@@ -1,18 +1,20 @@
 import React, { createContext, useContext, useState } from 'react'
 // Create Context declaration below
-const StateContext = createContext()
+const StateContext = createContext();
 // Declaration below initialState below
 const initialState = {
     chat: false,
     cart: false,
     userProfile: false,
-    notification: false
+    notification: false,
 }
 
 export const ContextProvider = ({ children }) => {
+    const [activeMenu, setActiveMenu] = useState(true)
     return (
-        <StateContext.Provider value={{ text: 'text' }}>
+        <StateContext.Provider value={{ activeMenu, setActiveMenu }}>
             {children}
         </StateContext.Provider>
     )
 }
+export const useStateContext = () => useContext(StateContext)

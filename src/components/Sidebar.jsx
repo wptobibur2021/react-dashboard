@@ -4,8 +4,9 @@ import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md';
 import { Link, NavLink } from 'react-router-dom'
 import { links } from '../data/dummy'
+import { useStateContext } from '../context/ContextProvider';
 const Sidebar = () => {
-    const activeMenu = true
+    const { activeMenu, setActiveMenu } = useStateContext()
     const activeLink = "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2"
     const normalLink = "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2"
     return (
@@ -14,12 +15,12 @@ const Sidebar = () => {
                 activeMenu && (
                     <>
                         <div className="flex justify-between items-center">
-                            <Link to='/' onClick={() => { }}
+                            <Link to='/' onClick={() => setActiveMenu(false)}
                                 className="items-center gap-3 ml-3 flex text3-xl font-extrabold tracking-tight dark:text-white text-slate-900" >
                                 <SiShopware /><span>Shoppy</span>
                             </Link>
                             <TooltipComponent content="Menu" position='BottomCenter'>
-                                <button type="button" onClick={() => { }} className="text-xl rounded-full p-3 hover:bg-light-gray block md:hidden">
+                                <button type="button" onClick={() => setActiveMenu((preActiveMenu) => !preActiveMenu)} className="text-xl rounded-full p-3 hover:bg-light-gray block md:hidden">
                                     <MdOutlineCancel />
                                 </button>
                             </TooltipComponent>
@@ -34,7 +35,7 @@ const Sidebar = () => {
                                         <NavLink
                                             to={`/${link.name}`}
                                             key={link.name}
-                                            onclick={() => { }}
+                                            onClick={() => { }}
                                             className={({ isActive }) => isActive ? activeLink : normalLink}
                                         >
                                             {link.icon}
