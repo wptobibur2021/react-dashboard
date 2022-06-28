@@ -18,10 +18,50 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     </TooltipComponent>
 )
 const Navbar = () => {
-    const { activeMenu, setActiveMenu } = useStateContext()
+    const { activeMenu, setActiveMenu, checked, setChecked, handleClick } = useStateContext()
+
     return (
         <div className="flex justify-between p-2 md:mx-6 relative">
             <NavButton title="Menu" customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} color="blue" icon={<AiOutlineMenu />} />
+            <div className="flex">
+                <NavButton
+                    title="Cart"
+                    color="blue"
+                    icon={<FiShoppingCart />}
+                    customFunc={() => handleClick('Cart')}
+                />
+                <NavButton
+                    title="Chat"
+                    color="blue"
+                    icon={<BsChatLeft />}
+                    customFunc={() => handleClick('Chat')}
+                    dotColor="#03C9D7"
+                />
+                <NavButton
+                    title="Notification"
+                    color="blue"
+                    icon={<RiNotification3Line />}
+                    customFunc={() => handleClick('Notification')}
+                    dotColor="#03C9D7"
+                />
+                <TooltipComponent
+                    content="Profile"
+                    position='BottomCenter'
+                >
+                    <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg">
+                        <img onClick={() => handleClick('userProfile')} className="rounded-full w-8 h-8" src={avatar} alt="Avatar" />
+                        <p>
+                            <span>Hi, </span>
+                            <span className="text-gray-400 font-bold ml-1 text-14">Tobibur</span>
+                        </p>
+                        <MdKeyboardArrowDown className="text-gray-400 text-14" />
+                    </div>
+                </TooltipComponent>
+                {checked.chat && <Chat />}
+                {checked.cart && <Cart />}
+                {checked.userProfile && <UserProfile />}
+                {checked.notification && <Notification />}
+            </div>
         </div>
     )
 }
