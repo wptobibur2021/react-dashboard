@@ -12,12 +12,13 @@ const initialState = {
 export const ContextProvider = ({ children }) => {
     const [activeMenu, setActiveMenu] = useState(true)
     const [checked, setChecked] = useState(initialState)
+    const [screenSize, setScreenSize] = useState(undefined)
     const handleClick = (checked) => {
         setChecked({ ...initialState, [checked]: true });
         console.log('Value: ', checked)
     }
     return (
-        <StateContext.Provider value={{ activeMenu, setActiveMenu, checked, setChecked, handleClick }}>
+        <StateContext.Provider value={{ activeMenu, setActiveMenu, checked, setChecked, handleClick, screenSize, setScreenSize }}>
             {children}
         </StateContext.Provider>
     )
