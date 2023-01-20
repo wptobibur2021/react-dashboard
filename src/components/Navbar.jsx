@@ -18,7 +18,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     </TooltipComponent>
 )
 const Navbar = () => {
-    const { activeMenu, setActiveMenu, checked, setChecked, handleClick, screenSize, setScreenSize } = useStateContext()
+    const { setActiveMenu, checked, handleClick, screenSize, setScreenSize } = useStateContext()
     useEffect(() => {
         const handleResize = () => setScreenSize(window.innerWidth)
         window.addEventListener('resize', handleResize)
